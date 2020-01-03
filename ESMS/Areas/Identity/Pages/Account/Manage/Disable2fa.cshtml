@@ -1,0 +1,25 @@
+﻿@page
+@model Disable2faModel
+@using ESMS
+@{
+    ViewData["Title"] = Resource.anuloTOTP;
+    ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
+}
+
+<partial name="_StatusMessage" for="StatusMessage" />
+<h2>@ViewData["Title"]</h2>
+
+<div class="alert alert-warning" role="alert">
+    <p>
+        <strong>@Resource.veprimTOTP</strong>
+    </p>
+    <p>
+        @Html.Raw(Resource.anulimi2FADescription) <a asp-page="./ResetAuthenticator">@Html.Raw(Resource.anulimi2FAReset)</a>
+    </p>
+</div>
+
+<div>
+    <form method="post" class="form-group">
+        <button class="btn btn-danger" type="submit">@Resource.anulo2FA</button>
+    </form>
+</div>

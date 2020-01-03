@@ -1,0 +1,214 @@
+﻿@page
+@using ESMS.Pages.Shared
+@using  System.Security.Claims
+@model ESMS.Pages.Employees.EditModel
+@{
+    ViewData["Title"] = "Ndryshimi i te dhenave";
+}
+<div class="card">
+    <form method="post" enctype="multipart/form-data">
+        @Html.HiddenFor(m => m.Input.UIEnc)
+        <div class="card-body card-block">
+            <h4>Ndryshim i te dhenave</h4>
+            <hr />
+            <br />
+            <h4>Të dhënat e përgjithshme për punëtorin</h4>
+            <hr />
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Input.FirstName)
+                        <input type="text" asp-for="Input.FirstName" class="form-control" disabled="disabled" />
+                        <span class="text-danger" asp-validation-for="Input.FirstName"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Input.LastName)
+                        <input type="text" asp-for="Input.LastName" class="form-control" disabled="disabled" />
+                        <span class="text-danger" asp-validation-for="Input.LastName"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Input.Gender)
+                        @Html.DropDownListFor(m => m.Input.Gender, BaseModel.GetGenders(), Resource.zgjedhe, new { @class = "form-control", disabled = "disabled" })
+                        <span class="text-danger" asp-validation-for="Input.Gender"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Input.BirthDate)
+                        <input type="date" asp-for="Input.BirthDate" class="form-control" disabled="disabled" />
+                        <span class="text-danger" asp-validation-for="Input.BirthDate"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Input.Position)
+                        @Html.DropDownListFor(m => m.Input.Position, BaseModel.GetGroups(2, User.FindFirstValue(ClaimTypes.Role)), Resource.zgjedhe, new { @class = "form-control" })
+                        <span class="text-danger" asp-validation-for="Input.Position"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Input.JobTitle)
+                        <input type="text" asp-for="Input.JobTitle" class="form-control" />
+                        <span class="text-danger" asp-validation-for="Input.JobTitle"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Input.PersonalNumber)
+                        <input type="text" asp-for="Input.PersonalNumber" class="form-control" disabled="disabled" />
+                        <span class="text-danger" asp-validation-for="Input.PersonalNumber"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Input.salary)
+                        <input type="number" asp-for="Input.salary" min="0" class="form-control" />
+                        <span class="text-danger" asp-validation-for="Input.salary"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Input.DtFrom)
+                        <input type="date" asp-for="Input.DtFrom" min="0" class="form-control" disabled="disabled" />
+                        <span class="text-danger" asp-validation-for="Input.DtFrom"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Input.DtTo)
+                        <input type="date" asp-for="Input.DtTo" min="0" class="form-control" />
+                        <span class="text-danger" asp-validation-for="Input.DtTo"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    @Html.LabelFor(m => m.Input.Contract)
+                    <div class="btn-group w-100">
+                        <button type="button" class="btn btn-secondary dropdown-toggle w-100" data-toggle="dropdown">@Resource.veprimet</button>
+                        <div class="dropdown-menu">
+                            <a href="Edit?handler=Document&docType=1&UIE=@Request.Query["UIEnc"]" target="_top" class="dropdown-item btn btn-secondary"><i class="far fa-edit"></i>&nbsp; Shiko kontraten aktuale</a>
+                            <a onclick="$('#Input_Contract').trigger('click')" id="btnAttachContract" class="dropdown-item btn btn-secondary"> <i class="far fa-plus-square"></i>  &nbsp; Ngarko kontraten e re</a>
+                            <input type="file" style="display:none" asp-for="Input.Contract" class="form-control" />
+                        </div>
+                    </div>
+                    <span class="text-danger" asp-validation-for="Input.Contract"></span>
+                </div>
+                <div class="col-md-4">
+                    @Html.LabelFor(m => m.Input.UserProfileImg)
+                    <div class="btn-group w-100">
+                        <button type="button" class="btn btn-secondary dropdown-toggle w-100" data-toggle="dropdown">@Resource.veprimet</button>
+                        <div class="dropdown-menu">
+                            <a href="Edit?handler=Document&docType=2&UIE=@Request.Query["UIEnc"]" target="_top" class="dropdown-item btn btn-secondary"><i class="far fa-edit"></i>&nbsp; Shiko fotografine aktuale</a>
+                            <a onclick="$('#Input_UserProfileImg').trigger('click')" id="btnAttachImage" class="dropdown-item btn btn-secondary"> <i class="far fa-plus-square"></i>  &nbsp; Ngarko fotografine e re</a>
+                            <input type="file" style="display:none" asp-for="Input.UserProfileImg" class="form-control" />
+                        </div>
+                    </div>
+                    <span class="text-danger" asp-validation-for="Input.UserProfileImg"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <h4>Adresa dhe kontakti</h4>
+            <hr />
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Input.Contry)
+                        @Html.TextBoxFor(m => m.Input.Contry, new { @class = "form-control", disabled = "disabled" })
+                        <span class="text-danger" asp-validation-for="Input.Contry"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Input.City)
+                        @Html.TextBoxFor(m => m.Input.City, new { @class = "form-control", disabled = "disabled" })
+                        <span class="text-danger" asp-validation-for="Input.City"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Input.PostalCode)
+                        <input asp-for="Input.PostalCode" type="number" min="1" class="form-control" />
+                        <span class="text-danger" asp-validation-for="Input.PostalCode"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Input.Adress, new { @class = "required" })
+                        <input type="text" asp-for="Input.Adress" class="form-control" />
+                        <span class="text-danger" asp-validation-for="Input.Adress"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Input.AdressOpsional)
+                        <input asp-for="Input.AdressOpsional" class="form-control" />
+                        <span class="text-danger" asp-validation-for="Input.AdressOpsional"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Input.PhoneNumber)
+                        <input asp-for="Input.PhoneNumber" class="form-control" />
+                        <span class="text-danger" asp-validation-for="Input.PhoneNumber"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Input.EmailAdress)
+                        <input asp-for="Input.EmailAdress" class="form-control" disabled="disabled" />
+                        <span class="text-danger" asp-validation-for="Input.EmailAdress"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <h4>Pagesat</h4>
+            <hr />
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Input.IBANCode)
+                        <input type="text" asp-for="Input.IBANCode" class="form-control" />
+                        <span class="text-danger" asp-validation-for="Input.IBANCode"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <input type="submit" class="btn btn-primary float-right m-3" value="@Resource.ndrysho" />
+    </form>
+</div>
+
+<script>
+    $('#Input_Contract').change(function () {
+        if ($(this).val() != null && $(this).val() != "") {
+            $('#btnAttachContract').text($(this).val().replace(/C:\\fakepath\\/i, ''))
+        } else {
+            $('#btnAttachContract').text('@Resource.ngarkoKontraten')
+        }
+    })
+
+        $('#Input_UserProfileImg').change(function () {
+        if ($(this).val() != null && $(this).val() != "") {
+            $('#btnAttachImage').text($(this).val().replace(/C:\\fakepath\\/i, ''))
+        } else {
+            $('#btnAttachImage').text('@Resource.ngarkoFotografine')
+        }
+    })
+</script>
+
+@if (Model.error != null)
+{
+    <script>
+        $(document).ready(function (){
+            showAlert(@Model.error.nError, '@Html.Raw(Model.error.ErrorDescription)')
+        })
+    </script>
+}

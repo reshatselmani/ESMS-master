@@ -1,0 +1,24 @@
+﻿@page
+@model ResetAuthenticatorModel
+@using ESMS
+@{
+    ViewData["Title"] = Resource.resetAuthenticatorKey;
+    ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
+}
+
+<partial name="_StatusMessage" for="StatusMessage" />
+<h4>@ViewData["Title"]</h4>
+<div class="alert alert-warning" role="alert">
+    <p>
+        <span class="glyphicon glyphicon-warning-sign"></span>
+        <strong>@Resource.resetRecoverCodesMessage</strong>
+    </p>
+    <p>
+        @Resource.procesi2FA
+    </p>
+</div>
+<div>
+    <form id="reset-authenticator-form" method="post" class="form-group">
+        <button id="reset-authenticator-button" class="btn btn-danger" type="submit">@Resource.resetAuthenticatorKey</button>
+    </form>
+</div>
